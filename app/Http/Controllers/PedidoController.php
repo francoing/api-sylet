@@ -91,13 +91,13 @@ class PedidoController extends Controller
             //con esta sentencia sql nos muestra los detalles de producto y relaciona la tabla orden con productos para obetener el detalle del  codigo
             // $query_detalle = $this->db->query('SELECT a.orden_id, b.* FROM `ordenes_detalle`a INNER JOIN productos b on a.producto_id = b.codigo WHERE orden_id= '.$row->id);
           
-            $query_detalle = DB::raw('SELECT a.orden_id, b.* FROM `ordenes_detalle`a INNER JOIN productos b on a.producto_id = b.codigo WHERE orden_id= '.$row->id);
+            //$query_detalle = DB::raw('SELECT a.orden_id, b.* FROM `ordenes_detalle`a INNER JOIN productos b on a.producto_id = b.codigo WHERE orden_id= '.$row->id);
             //mostramos la orden que obtenemos
             $orden= array(
 
                 'id'=>$row->id,
                 'creado_en'=>$row->creado_en,
-                'detalle'=>$query_detalle
+                //'detalle'=>$query_detalle
 
             );
 
