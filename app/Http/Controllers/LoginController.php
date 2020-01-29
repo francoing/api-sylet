@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    //https://almacen-api.herokuapp.com/login?correo=franco.montti.19@gmail.com&contrasena=franco20
     public function store(Request $request)
     {
         $correo = $request->correo;

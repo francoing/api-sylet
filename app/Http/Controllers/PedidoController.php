@@ -66,7 +66,7 @@ class PedidoController extends Controller
       
     }
 
-    public function obtener_pedidos($token,$id_usuario) 
+    public function obtener_pedidos($id_usuario,$token) 
     {
          // verificar token e id del usuario
 
