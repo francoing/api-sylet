@@ -22,7 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('Prueba/busqueda/{termino}', 'PruebaController@show');
 Route::get('Prueba/{id}/{pagina}', 'PruebaController@index');
 Route::resource('Prueba', 'PruebaController');*/
+/*Route::group(['middleware'=>'cors'],function(){
 
+
+    
+});*/
 //rutas de producto
 Route::get('productos/buscar/{termino}', 'ProductoController@show');
 Route::get('productos/todos/{pagina}', 'ProductoController@index');
@@ -41,5 +45,5 @@ Route::post('login', 'LoginController@store');
 //rutas para los pedidos
 
 Route::get('pedidos/obtener_pedidos/{id}/{token}', 'PedidoController@obtener_pedidos');
-Route::post('pedidos/realizar_orden/{token}/{id}', 'PedidoController@realizar_orden');
+Route::post('pedidos/realizar_orden/{token}/{id_usuario}', 'PedidoController@realizar_orden');
 

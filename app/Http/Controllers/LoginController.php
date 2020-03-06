@@ -12,7 +12,7 @@ class LoginController extends Controller
     {
         $correo = $request->correo;
         $contrasena = $request->contrasena;
-        $id_usuario= $request ->id;
+       // $id_usuario= $request ->id;
         $usuario = DB::table('login')
         ->where('correo' , $correo)
         ->where('contrasena',$contrasena)
@@ -25,12 +25,14 @@ class LoginController extends Controller
             
         }else{
             $token = str_random(40);
+            //$usuario= $id_usuario->get('id');
+            $id_usuario = DB::table('login')->where('correo', $correo)->value('id');
             $usuario = DB::table('login')
-            ->where('id', $usuario->id)
+            ->where('id', $id_usuario)
             ->update(['token'=>$token]) ;
             $respuesta = array('error' => FALSE,
                                 'mensaje'=>'Succes',
-                                //'id_usuario'=> $usuario->id,
+                                'id_usuario'=> $id_usuario,
                                  'token' => $token,
                                 );
            

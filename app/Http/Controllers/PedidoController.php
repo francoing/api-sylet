@@ -18,11 +18,11 @@ class PedidoController extends Controller
       
         //aqui validamos y decimos que el id tiene que ser igual a lo que me traiga asi como el token
         $verifica = DB::table('login')
-                    ->where('id', $id_usuario)
                     ->where('token',$token)
+                    ->where('id', $id_usuario)
                     ->first();
 
-        if (!$verifica == null) {
+        if ($verifica == null) {
             $respuesta = array('error' => TRUE,
                                 'mensaje'=>'Usuario y/o  token incorrectos' );
 
@@ -36,30 +36,68 @@ class PedidoController extends Controller
                                   
                     return $respuesta;
             }else {
-                    $orden_id = DB::table('ordenes')->insertGetId(
-                        ['usuario_id' => $id_usuario]
-                                                        );
 
-                            //esta instruccion me sirve para traer mis items y separarlos por comas
-                            $items= explode(',',$data['items']);
+                    $orden_id = DB::table('ordenes')->insertGetId(
+                        ['usuario_id' => $id_usuario]);
+
+                           $items= explode(',',$data['items']);
+                           //dd($items);
+                           /*
+                           foreach ($items as $producto_id)   {
+
+                           
+
+                            $data_insertar = DB::table('ordenes_detalle')
+                                        ->insertGetId(
+                                            ['producto_id'=>$producto_id,
+                                            'orden_id'=>$orden_id,
+                                            'cantidad'=>'1',]);
+
+                        }
+                        */
+
+                        for($i=0;$i<count($items);$i+=3){
+                            $producto_id=$items[$i];
+                            $cantidad=$items[$i+1];
+                            $precioproducto=$items[$i+2];
+                            $data_insertar = DB::table('ordenes_detalle')
+                                        ->insertGetId(
+                                            ['producto_id'=>$producto_id,
+                                            'orden_id'=>$orden_id,
+                                            'cantidad'=>$cantidad,
+                                            'precioproducto'=>$precioproducto]);
+                        }
+                   
+                            
 
                             // //insertamos el detalle de orden con este foreach
+                           /*foreach ($items as $producto_id)   {
 
-                            foreach ($items as $producto_id)   {
-
-                                $data_insertar = DB::table('ordenes_detalle')
-                                            ->insertGetId(
-                                                ['producto_id'=>$producto_id,
-                                                'orden_id'=>$orden_id]);
-
-                            }
+                                if ($items.length()%2!=0) {
+                                    $data_insertar = DB::table('ordenes_detalle')
+                                    ->insert(
+                                        ['producto_id'=>$producto_id,
+                                        ]);
+                                    
+                                }else {
+                                    $data_insertar = DB::table('ordenes_detalle')
+                                            >where('orden_id')
+                                            ->insert(
+                                                [
+                                                'cantidad'=>$cantidad,
+                                                ]);
+                                         }
+                                    
+                                }*/
                             $respuesta = array(
                                 'mensaje'=>FALSE,
-                                'orden_id'=> $orden_id
+                                'orden_id'=> $orden_id,
+                                'producto_id'=>$producto_id,
+                                'cantidad'=>$cantidad
                             );
 
                             return $respuesta;    
-                    }
+        }
                                 
 
                                     
@@ -93,6 +131,9 @@ class PedidoController extends Controller
           
             //$query_detalle = DB::raw('SELECT a.orden_id, b.* FROM `ordenes_detalle`a INNER JOIN productos b on a.producto_id = b.codigo WHERE orden_id= '.$row->id);
             //mostramos la orden que obtenemos
+
+            $query_detalle = DB::table('orden_detalle')
+                              ->select('SELECT orden_id, b.* FROM `ordenes_detalle`a');
             $orden= array(
 
                 'id'=>$row->id,
