@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use DB;
 use App\pedido;
-
+use App\Exports\Ordenes_detalleExport;
+use App\Exports\OrdenesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -153,4 +155,37 @@ class PedidoController extends Controller
         return $respuesta;
 
     }
+
+    //------------------------------------------------funcion para descargar la informacion en txt------------------------------------
+
+    /*public function descargar()
+    {
+             set_time_limit(600);
+             $file= public_path(). "/ordenes.txt";
+             $fp = fopen($file, 'w');
+
+             DB::table('ordenes_detalle')->orderBy('id')->chunk(10, function ($datos) use ($fp){
+                    foreach ($datos as $dato) {
+                                   fwrite($fp, $dato->valor1.','.$dato->valor2."\r\n");
+                                }
+               });
+
+               return response()->download($file);
+
+        
+    }*/
+    public function exportDetalle() 
+    {
+        return Excel::download(new Ordenes_detalleExport, 'DetalleOrdenes.csv');
+    }
+    public function exportOrden() 
+    {
+        return Excel::download(new OrdenesExport, 'Ordenes.csv');
+
+        
+    }
+
+
+
+
 }

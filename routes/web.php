@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('pedidos/descargar', 'PedidoController@descargar');
+//descargar los datos
+Route::get('pedidos/export/detalle_orden/', 'PedidoController@exportDetalle');
+Route::get('pedidos/export/ordenes/', 'PedidoController@exportOrden');
+

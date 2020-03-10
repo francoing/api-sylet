@@ -6,13 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "ext-gd": "*",
         "fideloper/proxy": "~3.3",
         "intervention/image": "^2.5",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "ext-gd": "*"
-        
-
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
