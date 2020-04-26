@@ -43,20 +43,7 @@ class PedidoController extends Controller
                         ['usuario_id' => $id_usuario]);
 
                            $items= explode(',',$data['items']);
-                           //dd($items);
-                           /*
-                           foreach ($items as $producto_id)   {
-
                            
-
-                            $data_insertar = DB::table('ordenes_detalle')
-                                        ->insertGetId(
-                                            ['producto_id'=>$producto_id,
-                                            'orden_id'=>$orden_id,
-                                            'cantidad'=>'1',]);
-
-                        }
-                        */
 
                         for($i=0;$i<count($items);$i+=3){
                             $producto_id=$items[$i];
@@ -72,25 +59,7 @@ class PedidoController extends Controller
                    
                             
 
-                            // //insertamos el detalle de orden con este foreach
-                           /*foreach ($items as $producto_id)   {
-
-                                if ($items.length()%2!=0) {
-                                    $data_insertar = DB::table('ordenes_detalle')
-                                    ->insert(
-                                        ['producto_id'=>$producto_id,
-                                        ]);
-                                    
-                                }else {
-                                    $data_insertar = DB::table('ordenes_detalle')
-                                            >where('orden_id')
-                                            ->insert(
-                                                [
-                                                'cantidad'=>$cantidad,
-                                                ]);
-                                         }
-                                    
-                                }*/
+                          
                             $respuesta = array(
                                 'mensaje'=>FALSE,
                                 'orden_id'=> $orden_id,
@@ -122,9 +91,7 @@ class PedidoController extends Controller
                                 'mensaje'=>'Usuario y/o token incorrectos' );
                          
         }
-        // $query = $this->db->query('SELECT * FROM `ordenes` where usuario_id=' .$id_usuario);
         $query=DB::select('SELECT * FROM `ordenes` where usuario_id=' .$id_usuario);
-
         $ordenes = array();
 
         foreach ($query as $row) {
@@ -140,8 +107,6 @@ class PedidoController extends Controller
 
                 'id'=>$row->id,
                 'creado_en'=>$row->creado_en,
-                //'detalle'=>$query_detalle
-
             );
 
             //insertamos la orden
@@ -153,6 +118,8 @@ class PedidoController extends Controller
                         );
 
         return $respuesta;
+
+        
 
     }
 
@@ -174,6 +141,10 @@ class PedidoController extends Controller
 
         
     }*/
+    //-------------------------------------------exportar los datos---------------------------------------------------
+
+    //https://almacen-api.herokuapp.com/pedidos/export/detalle_orden/
+    // https://almacen-api.herokuapp.com/pedidos/export/ordenes/ 
     public function exportDetalle() 
     {
         return Excel::download(new Ordenes_detalleExport, 'DetalleOrdenes.csv');

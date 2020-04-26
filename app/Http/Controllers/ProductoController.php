@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use DB;
 use App\producto;
+use Illuminate\Support\Facades\Input;
+// use File;
 
 use Illuminate\Http\Request;
 
@@ -65,5 +67,65 @@ class ProductoController extends Controller
         return $respuesta;
          
      }
+
+
+    // ------- WEB-----------------------------------------------------------------------------------------------------
+
+    // public function __construct()
+    // {
+
+    //     $this->middleware('auth');
+    // }
+
+    public function indexWeb()
+    {
+        $productos=DB::table('productos as p')
+            ->join('lineas as l','p.linea_id','=','l.id')
+            ->select('p.codigo','p.producto','p.precio_compra','l.linea as categoria','p.imagen')
+            ->paginate(10);
+        // $productos = DB::table('productos')->paginate(15);
+        // $lineas = DB::table('lineas')->get();
+
+        return view('escritorioalmacen.producto.index', ['productos' => $productos]);
+    }
+
+    public function create()
+    {
+        $lineas = DB::table('lineas')->get();
+        return view('escritorioalmacen.producto.create',['lineas'=>$lineas]);
+    }
+
+    public function store(Request $request)
+    {
+
+        $producto = new producto;
+        $producto->codigo = $request->input('codigo');
+        $producto->linea_id= $request->linea_id;
+        // $producto->linea = $request->input('linea');
+        // $producto->linea=$request->linea;
+         $producto->producto=$request->input('producto');
+         $producto->proveedor = $request->input('proveedor');
+         $producto->descripcion = $request->input('descripcion');
+         $producto->precio_compra=$request->input('precio_compra');
+
+        //  if ($producto->linea =="") {  
+        //     $producto->linea = 'General';
+        //  }
+
+         if(Input::hasFile('imagen'))
+        {
+            $file=Input::file('imagen');
+            $nomImg=uniqid().$file->getClientOriginalName();
+           // guardo la imagen y le asigno un id unico para que no haya conflictos con la imagen
+           $file->move(public_path().'/img/productos',$nomImg);
+           $producto->imagen=$nomImg;
+
+
+        }
+
+        $producto->save();
+        
+        return redirect('escritorioalmacen/producto/index');
+    }
  
 }
