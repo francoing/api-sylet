@@ -40,4 +40,17 @@ class LoginController extends Controller
 
          return $respuesta;
     }
+
+
+// -----------------------------------------------------------WEB-------------------------------------------------------
+
+    public function index()
+    {
+        $usuarios= DB::table('login')->paginate(10);
+        return view('escritorioalmacen.usuario.index',['usuarios'=>$usuarios]);
+    }
+
+
+
+
 }

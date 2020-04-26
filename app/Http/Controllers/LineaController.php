@@ -23,13 +23,7 @@ class LineaController extends Controller
 
     //------------- WEB--------------------------------------------------------
 
-    // public function __construct()
-    // {
-
-
-    //     $this->middleware('auth');
-    // }
-
+   
      public function indexWeb(Linea $lineas)
     {
         $lineas = DB::table('lineas')->paginate(15);
