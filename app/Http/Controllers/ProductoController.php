@@ -127,5 +127,12 @@ class ProductoController extends Controller
         
         return redirect('escritorioalmacen/producto/index');
     }
+
+    public function delete($id)
+    {   
+        producto::where('codigo', $id)->delete();
+
+       return  redirect('escritorioalmacen/producto/index');
+    }
  
 }

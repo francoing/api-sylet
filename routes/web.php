@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-
+// Exportar los datos a documentos excel
 Route::get('pedidos/export/detalle_orden/', 'PedidoController@exportDetalle');
 Route::get('pedidos/export/ordenes/', 'PedidoController@exportOrden');
 
@@ -39,10 +39,12 @@ Route::post('escritorioalmacen/categoria/', 'LineaController@store');
 Route::get('escritorioalmacen/producto/index/', 'ProductoController@indexWeb');
 Route::get('escritorioalmacen/producto/create/', 'ProductoController@create');
 Route::post('escritorioalmacen/producto/', 'ProductoController@store');
+Route::delete('escritorioalmacen/producto/{id}', 'ProductoController@delete');
 
 // Vista de usuarios
 Route::get('escritorioalmacen/usuario/index/', 'LoginController@index');
-
+Route::get('escritorioalmacen/usuario/create', 'LoginController@create');
+Route::post('escritorioalmacen/usuario/', 'LoginController@storeWeb');
 });
 
 

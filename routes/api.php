@@ -40,7 +40,7 @@ Route::get('lineas', 'LineaController@index');
 
 //rutas de Login
 
-Route::post('login', 'LoginController@store');
+Route::post('inicio', 'InicioController@store');
 
 //rutas para los pedidos
 

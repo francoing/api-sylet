@@ -19,7 +19,9 @@
                                 <th>Nombre</th>
                                 <th>Categoria</th>
                                 <th>Precio</th>
-                                <th>imagenes</th>
+                                <th>Imagenes</th>
+                                <th>Opciones</th>
+
 
                             </thead>
                             @foreach($productos as $pro) <!--la variable que recibo del controlador la guardo en cat y la muestro-->
@@ -42,16 +44,14 @@
 
                                        
                                       
-                                        {{-- <form method="post" action="{{url('almacen/categoria/'.$cat->idcategoria) }}">
+                                        <form method="post" action="{{url('escritorioalmacen/producto/'.$pro->codigo) }}">
                                             {{ csrf_field() }}
                                             {{method_field('DELETE')}}
-                                            <a href="{{URL::action('CategoriaController@edit',$cat->idcategoria)}}"><button type="button" class="btn btn-info">Editar</button></a>
-                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
-                                                                   <i class="fa fa-times"></i>
-                                                               </button>
-                                                                </form>
+                                            <a href="#"><button type="button" title="Editar" class="btn btn-info">Editar</button></a>
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple" >Eliminar</button>
+                                                               
+                                        </form>
                                     
-                                        </a> --}}
 
 
                                     </td>

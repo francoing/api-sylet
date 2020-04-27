@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class login extends Model
+class Inicio extends Model
 {
     protected $table = 'login';
 

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use DB;
-use App\login;
+use App\Inicio;
+
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class InicioController extends Controller
 {
-    //https://almacen-api.herokuapp.com/login?correo=franco.montti.19@gmail.com&contrasena=franco20
+    //https://almacen-api.herokuapp.com/inicio?correo=franco.montti.19@gmail.com&contrasena=franco20
     public function store(Request $request)
     {
         $correo = $request->correo;
@@ -40,32 +41,5 @@ class LoginController extends Controller
 
          return $respuesta;
     }
-
-
-// -----------------------------------------------------------WEB-------------------------------------------------------
-
-    public function index()
-    {
-        $usuarios= DB::table('login')->paginate(10);
-        return view('escritorioalmacen.usuario.index',['usuarios'=>$usuarios]);
-    }
-
-    public function create()
-    {
-        return view('escritorioalmacen.usuario.create');
-    }
-    public function storeWeb(Request $request)
-    {
-        $usuario = new login;
-        $usuario->correo= $request->input('correo');
-        $usuario->contrasena = $request->input('contrasena');
-        $usuario->token = str_random(40);
-        $usuario->save();
-
-        return redirect('escritorioalmacen/usuario/index');
-    }
-
-
-
-
+   
 }
