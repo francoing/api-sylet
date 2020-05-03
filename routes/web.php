@@ -22,6 +22,8 @@ Route::get('/', function () {
 // Exportar los datos a documentos excel
 Route::get('pedidos/export/detalle_orden/', 'PedidoController@exportDetalle');
 Route::get('pedidos/export/ordenes/', 'PedidoController@exportOrden');
+Route::get('pedidos/export/ordenesdetallesorden/', 'PedidoController@exportOrdenDetalle');
+
 
 Route::middleware(['auth'])->group(function () {
    //Route::get('pedidos/descargar', 'PedidoController@descargar');

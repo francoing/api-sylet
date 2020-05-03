@@ -5,6 +5,7 @@ use DB;
 use App\pedido;
 use App\Exports\Ordenes_detalleExport;
 use App\Exports\OrdenesExport;
+use App\Exports\Orden_DetalledeOrden;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
@@ -155,6 +156,13 @@ class PedidoController extends Controller
 
         
     }
+    public function exportOrdenDetalle() 
+    {
+        return Excel::download(new Orden_DetalledeOrden, 'Ordenes_DetalleOrden.csv');
+
+        
+    }
+
 
 
 
