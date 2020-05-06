@@ -64,6 +64,12 @@ class LoginController extends Controller
 
         return redirect('escritorioalmacen/usuario/index');
     }
+    public function delete($id)
+    {   
+        login::where('id', $id)->delete();
+
+       return  redirect('escritorioalmacen/usuario/index');
+    }
 
 
 

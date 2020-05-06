@@ -128,6 +128,41 @@ class ProductoController extends Controller
         return redirect('escritorioalmacen/producto/index');
     }
 
+    public function edit($codigo)
+    {
+        $producto = producto::findOrfail($codigo);
+        $lineas = DB::table('lineas')->get();
+        return view ("escritorioalmacen.producto.edit",["producto"=>$producto,"lineas"=>$lineas]);
+
+    }
+
+    public function update($codigo ,Request $request)
+    {
+        $producto = producto::findOrfail($codigo);
+        $producto->linea_id =$request->put('linea_id');
+        $producto->producto = $reques->put('producto');
+        $producto->precio_compra = $reques->put('precio_compra');
+        $producto->proveedor = $reques->put('proveedor');
+        $producto->descripcion = $reques->put('descripcion');
+
+        if(Input::hasFile('imagen'))
+        {
+            $file=Input::file('imagen');
+            $nomImg=uniqid().$file->getClientOriginalName();
+           // guardo la imagen y le asigno un id unico para que no haya conflictos con la imagen
+           $file->move(public_path().'/img/productos',$nomImg);
+           $producto->imagen=$nomImg;
+
+
+        }
+        $producto->save();
+        return Redirect::to('escritorioalmacen/producto/index');
+
+        
+
+    }
+
+
     public function delete($id)
     {   
         producto::where('codigo', $id)->delete();

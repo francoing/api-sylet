@@ -36,17 +36,29 @@ Route::middleware(['auth'])->group(function () {
 Route::get('escritorioalmacen/categoria/index/', 'LineaController@indexWeb');
 Route::get('escritorioalmacen/categoria/create/', 'LineaController@create');
 Route::post('escritorioalmacen/categoria/', 'LineaController@store');
+Route::get('escritorioalmacen/categoria/edit/{id}', 'LineaController@edit');
+Route::post('escritorioalmacen/categoria/edit/{id}', 'LineaController@update');
+Route::delete('escritorioalmacen/categoria/{id}', 'LineaController@delete');
+
+
 
 // Vista de producto
 Route::get('escritorioalmacen/producto/index/', 'ProductoController@indexWeb');
 Route::get('escritorioalmacen/producto/create/', 'ProductoController@create');
 Route::post('escritorioalmacen/producto/', 'ProductoController@store');
 Route::delete('escritorioalmacen/producto/{id}', 'ProductoController@delete');
+Route::get('escritorioalmacen/producto/edit/{id}', 'ProductoController@edit');
+Route::post('escritorioalmacen/producto/edit/{id}', 'ProductoController@update');
+
 
 // Vista de usuarios
 Route::get('escritorioalmacen/usuario/index/', 'LoginController@index');
 Route::get('escritorioalmacen/usuario/create', 'LoginController@create');
 Route::post('escritorioalmacen/usuario/', 'LoginController@storeWeb');
+Route::delete('escritorioalmacen/usuario/{id}', 'LoginController@delete');
+
+
+
 });
 
 

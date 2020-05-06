@@ -28,16 +28,16 @@
 
                                        
                                       
-                                        {{-- <form method="post" action="{{url('almacen/categoria/'.$cat->idcategoria) }}">
+                                        <form method="post" action="{{url('/escritorioalmacen/usuario/'.$usuario->id) }}">
                                             {{ csrf_field() }}
                                             {{method_field('DELETE')}}
-                                            <a href="{{URL::action('CategoriaController@edit',$cat->idcategoria)}}"><button type="button" class="btn btn-info">Editar</button></a>
-                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple btn-xs">
-                                                                   <i class="fa fa-times"></i>
+                                            {{-- <a href="{{URL::action('CategoriaController@edit',$cat->idcategoria)}}"><button type="button" class="btn btn-info">Editar</button></a> --}}
+                                            <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple">
+                                                                 Eliminar
                                                                </button>
                                                                 </form>
                                     
-                                        </a> --}}
+                                        </a>
 
 
                                     </td>

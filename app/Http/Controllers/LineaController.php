@@ -49,4 +49,33 @@ class LineaController extends Controller
 
     }
 
+    public function edit($id)
+    {
+        
+        // $linea = DB::table('lineas')->get();
+        $linea = linea::findOrfail($id);
+        return view ("escritorioalmacen.categoria.edit",["linea"=>$linea]);
+    }
+    public function update($id ,Request $request)
+    {
+        $linea = linea::findOrfail($id);
+        $linea ->linea = $request->input('linea');
+        $linea ->icono = $request->input('icono');
+        $linea->save();
+        return redirect('escritorioalmacen/categoria/index');
+
+
+
+        
+    }
+
+    public function delete($id)
+    {   
+        linea::where('id', $id)->delete();
+
+       return  redirect('escritorioalmacen/categoria/index');
+    }
+
+
+
 }

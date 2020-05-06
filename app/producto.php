@@ -13,6 +13,7 @@ class producto extends Model
     public $timestamps = false ; // agrega dos columas de actualizacion y creacion
  
     protected $fillable = [
+        // 'codigo',
         'producto',
         'linea',
         'linea_id',

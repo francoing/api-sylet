@@ -47,7 +47,7 @@
                                         <form method="post" action="{{url('escritorioalmacen/producto/'.$pro->codigo) }}">
                                             {{ csrf_field() }}
                                             {{method_field('DELETE')}}
-                                            <a href="#"><button type="button" title="Editar" class="btn btn-info">Editar</button></a>
+                                            {{-- <a href="{{ url('escritorioalmacen/producto/edit/'.$pro->codigo)}}"><button type="button" title="Editar" class="btn btn-info">Editar</button></a> --}}
                                             <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple" >Eliminar</button>
                                                                
                                         </form>
