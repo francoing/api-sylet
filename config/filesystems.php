@@ -62,6 +62,9 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
+        'disco'=>[
+            'driver' => 'C:/GV',
+        ]
 
     ],
 

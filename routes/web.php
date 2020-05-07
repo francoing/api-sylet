@@ -57,6 +57,13 @@ Route::get('escritorioalmacen/usuario/create', 'LoginController@create');
 Route::post('escritorioalmacen/usuario/', 'LoginController@storeWeb');
 Route::delete('escritorioalmacen/usuario/{id}', 'LoginController@delete');
 
+// Vista de los pedidos
+Route::get('escritorioalmacen/pedido/index', 'PedidoController@index');
+Route::get('escritorioalmacen/pedido/edit/{id}', 'PedidoController@edit');
+
+
+
+
 
 
 });

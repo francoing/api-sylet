@@ -158,7 +158,9 @@ class PedidoController extends Controller
     }
     public function exportOrdenDetalle() 
     {
-        return Excel::download(new Orden_DetalledeOrden, 'Ordenes_DetalleOrden.csv');
+         return Excel::download(new Orden_DetalledeOrden, 'Ordenes_DetalleOrden.csv');
+        // return (new Orden_DetalledeOrden)->store('Ordenes_DetalleOrden.csv', 'C:/GV');
+        // return Excel::store(new Orden_DetalledeOrden(2020), 'Ordenes_DetalleOrden.csv', 's3');
 
         
     }
@@ -168,9 +170,33 @@ class PedidoController extends Controller
 
     //-------------------------------------------------------------------------------WEB--------------------------------------------------------------------------
     
-    // public function index()
-    // {
+    public function index()
+    {
+        $ordenes=DB::table('ordenes as o')
+        ->join('login as u','o.usuario_id','=','u.id')
+        ->select('o.id','u.correo as usuario','o.creado_en')
+        ->orderBy('id', 'desc')
+        ->paginate(10);
+
+
+        return view('escritorioalmacen.pedido.index', ['ordenes' => $ordenes]); 
         
-    // }
+    }
+
+    public function edit($id)
+    {
+    //    $orden=Ordenes::find($id);
+    //    $detalle=DB::table('ordenes_detalle');
+    //    $pedido = DB::table('ordenes_detalle as d')
+    //    ->join('ordenes as o','d.orden_id','=','o.id')
+    //    ->select('');
+    $pedido = DB::table('ordenes_detalle')->where('orden_id',$id)
+    ->paginate(5);
+
+
+
+    return view('escritorioalmacen.pedido.edit', ['pedido'=>$pedido]);
+
+    }
 
 }

@@ -116,7 +116,7 @@
               </a>
               <ul class="treeview-menu">
                 {{-- <li><a href="#"><i class="fa fa-circle-o"></i> Ventas</a></li> --}}
-                <li><a href="#"><i class="fa fa-circle-o"></i> Pedidos</a></li>
+                <li><a href="{{url('/escritorioalmacen/pedido/index')}}"><i class="fa fa-circle-o"></i> Pedidos</a></li>
                 {{-- <li><a href="#"><i class="fa fa-circle-o"></i> Clientes</a></li> --}}
               </ul>
             </li>
