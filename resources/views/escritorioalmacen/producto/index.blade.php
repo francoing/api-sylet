@@ -19,6 +19,7 @@
                                 <th>Nombre</th>
                                 <th>Categoria</th>
                                 <th>Precio</th>
+                                <th>Marca</th>
                                 <th>Imagenes</th>
                                 <th>Opciones</th>
 
@@ -37,6 +38,8 @@
                                     <td>{{$pro->categoria}}</td>
 
                                     <td>{{$pro->precio_compra}}</td>
+                                    <td>{{$pro->proveedor}}</td>
+
                                     <td>
                                         <img src="{{asset('img/productos/'.$pro->imagen)}}"  height="100px" width="100px" class="img-thumbnail">
                                     </td>
@@ -47,7 +50,7 @@
                                         <form method="post" action="{{url('escritorioalmacen/producto/'.$pro->codigo) }}">
                                             {{ csrf_field() }}
                                             {{method_field('DELETE')}}
-                                            {{-- <a href="{{ url('escritorioalmacen/producto/edit/'.$pro->codigo)}}"><button type="button" title="Editar" class="btn btn-info">Editar</button></a> --}}
+                                            <a href="{{ url('escritorioalmacen/producto/edit/'.$pro->id)}}"><button type="button" title="Editar" class="btn btn-info">Editar</button></a>
                                             <button type="submit" rel="tooltip" title="Eliminar" class="btn btn-danger btn-simple" >Eliminar</button>
                                                                
                                         </form>

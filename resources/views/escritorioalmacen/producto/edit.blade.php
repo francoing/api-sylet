@@ -23,7 +23,7 @@
                 {{-- {!!Form::model($articulo,['method'=>'PATCH','route'=>['articulo.update',$articulo->idarticulo],'files'=>'true'])!!}
                 {{Form::token()}} --}}
 
-                <form action="{{url('escritorioalmacen/producto/edit/'.$producto->codigo) }}" method="post" enctype="multipart/form-data">
+                <form action="{{url('escritorioalmacen/producto/edit/'.$producto->id) }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
  <div class="row">
@@ -56,13 +56,13 @@
         </div>
 
 
-        {{-- <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
                 <label for="codigo" class="">Codigo</label>
-                <input type="text" name="codigo" required value="{{old('codigo',$producto-> codigo)}}" class="form-control ">
+                <input type="text" name="codigo" required value="{{old('codigo',$producto->codigo)}}" class="form-control ">
 
             </div>
-        </div> --}}
+        </div>
 
 
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">

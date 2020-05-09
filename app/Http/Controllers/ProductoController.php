@@ -81,7 +81,7 @@ class ProductoController extends Controller
     {
         $productos=DB::table('productos as p')
             ->join('lineas as l','p.linea_id','=','l.id')
-            ->select('p.codigo','p.producto','p.precio_compra','l.linea as categoria','p.imagen')
+            ->select('p.id','p.codigo','p.producto','p.precio_compra','l.linea as categoria','p.proveedor','p.imagen')
             ->paginate(10);
         // $productos = DB::table('productos')->paginate(15);
         // $lineas = DB::table('lineas')->get();
@@ -99,6 +99,7 @@ class ProductoController extends Controller
     {
 
         $producto = new producto;
+        $producto->id = $request->input('id');
         $producto->codigo = $request->input('codigo');
         $producto->linea_id= $request->linea_id;
         // $producto->linea = $request->input('linea');
@@ -128,22 +129,41 @@ class ProductoController extends Controller
         return redirect('escritorioalmacen/producto/index');
     }
 
-    public function edit($codigo)
+    public function edit($id)
     {
-        $producto = producto::findOrfail($codigo);
+        $producto = producto::findOrfail($id);
         $lineas = DB::table('lineas')->get();
         return view ("escritorioalmacen.producto.edit",["producto"=>$producto,"lineas"=>$lineas]);
 
     }
 
-    public function update($codigo ,Request $request)
+    public function update($id ,Request $request)
     {
-        $producto = producto::findOrfail($codigo);
-        $producto->linea_id =$request->put('linea_id');
-        $producto->producto = $reques->put('producto');
-        $producto->precio_compra = $reques->put('precio_compra');
-        $producto->proveedor = $reques->put('proveedor');
-        $producto->descripcion = $reques->put('descripcion');
+        $producto = producto::findOrfail($id);
+        $producto->codigo =$request->input('codigo');
+        $producto->linea_id =$request->input('linea_id');
+        $producto->producto = $request->input('producto');
+        $producto->precio_compra = $request->input('precio_compra');
+        $producto->proveedor = $request->input('proveedor');
+        $producto->descripcion = $request->input('descripcion');
+
+        // $codigo->codigo=$request;
+        // $linea_id=$request->linea_id;
+        // $producto=$request->producto;
+        // $precio_compra= $request->precion_compra ;
+        // $proveedor=$request->proveedor;
+        // $descripcion=$request->descripcion;
+
+        // $actualizacion=DB::table('productos')
+        // ->where('codigo',$codigo)
+        // ->update(['linea_id'=>$linea_id,
+        //         'producto'=>$producto,
+        //         'precio_compra'=>$precio_compra,
+        //         'proveedor'=>$proveedor,
+        //         'descripcion'=>$descripcion,
+         
+        
+        // ]);
 
         if(Input::hasFile('imagen'))
         {
@@ -156,7 +176,7 @@ class ProductoController extends Controller
 
         }
         $producto->save();
-        return Redirect::to('escritorioalmacen/producto/index');
+        return redirect('escritorioalmacen/producto/index');
 
         
 

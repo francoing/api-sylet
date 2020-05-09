@@ -8,12 +8,12 @@ class producto extends Model
 {
     protected $table = 'productos';
 
-    protected $primaryKey ='codigo';
+    protected $primaryKey ='id';
  
     public $timestamps = false ; // agrega dos columas de actualizacion y creacion
  
     protected $fillable = [
-        // 'codigo',
+        'codigo',
         'producto',
         'linea',
         'linea_id',
